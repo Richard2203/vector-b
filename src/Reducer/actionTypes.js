@@ -3,6 +3,7 @@ export const ADD_VARIABLE = '[DRAW_MATRIX] Add Variable';
 export const REMOVE_VARIABLE = '[DRAW_MATRIX] Remove Variable';
 export const ADD_RESTRICTION = '[DRAW_MATRIX] Add Restriction';
 export const REMOVE_RESTRICTION = '[DRAW_MATRIX] Remove Restriction';
+export const UPDATE_VARIABLE = '[DRAW_MATRIX] UPDATE_VARIABLE';
 
 // CALCULATE OPTIMAL SOLUTION
 export const XB = '[OPSolution] Calculate Xb'; 

@@ -3,6 +3,7 @@ import {
     REMOVE_VARIABLE, 
     ADD_RESTRICTION, 
     REMOVE_RESTRICTION, 
+    UPDATE_VARIABLE,
     XB, 
     isFACTIBLE, 
     Z, 
@@ -10,19 +11,21 @@ import {
     SEARCH_SMALLEST_POSITIVE_QUOTIENT, 
     DIVIDE_BY_ONE, 
     GAUSS_JORDAN, 
-    GET_Z 
+    GET_Z, 
 } from './actionTypes';
 
 export const variablesReducer = (initialState=[], action)=>{
     switch (action.type) {
         case ADD_VARIABLE:
-            console.log("add varaible", initialState);
             return [...initialState, action.payload];
-        case REMOVE_VARIABLE:
-            console.log("remove varaible", initialState);
-            return [...initialState, action.payload];;
+        case REMOVE_VARIABLE:      
+            return state.length > 0 ? state.slice(0, -1) : state;  // Elimina el último elemento si hay alguno
+        case UPDATE_VARIABLE: // Nuevo caso para actualizar un valor
+            const { index, newValue } = action.payload;
+            return state.map((item, idx) =>
+                idx === index ? newValue : item
+            );
         default:
-            console.log("default varaible", initialState);
             return initialState;
     } 
 }

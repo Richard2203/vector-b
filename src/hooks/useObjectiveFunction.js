@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { ADD_VARIABLE, REMOVE_VARIABLE } from '../Reducer/actionTypes';
+import { ADD_VARIABLE, REMOVE_VARIABLE, UPDATE_VARIABLE } from '../Reducer/actionTypes';
 import { variablesReducer } from '../Reducer/MatrixCalculationsReducer';
 
 const init = (initialObjectiveFunction) => { 
@@ -7,6 +7,7 @@ const init = (initialObjectiveFunction) => {
 };
 
 export const useObjectiveFunction = (initialObjectiveFunction) => {
+    console.log(initialObjectiveFunction);
     const [objectiveFunction, dispatchObjectiveFunction] = useReducer(
         variablesReducer, 
         initialObjectiveFunction, 
@@ -17,10 +18,10 @@ export const useObjectiveFunction = (initialObjectiveFunction) => {
         localStorage.setItem('objectiveFunction', JSON.stringify(objectiveFunction));
     }, [objectiveFunction]);
 
-    const handleAddVariable = (variable) => {
+    const handleAddVariable = () => {
         dispatchObjectiveFunction({
             type: ADD_VARIABLE,
-            payload: variable,
+            payload: 0,
         });
     };
 
@@ -30,9 +31,17 @@ export const useObjectiveFunction = (initialObjectiveFunction) => {
         });
     };
 
+    const handleUpdateVariable = (index, newValue) => {
+        dispatchObjectiveFunction({
+          type: UPDATE_VARIABLE,
+          payload: { index, newValue },
+        });
+      };
+
     return {
         objectiveFunction,
         handleAddVariable,
         handleRemoveVariable,
+        handleUpdateVariable,
     };
 };

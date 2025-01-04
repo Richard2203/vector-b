@@ -15,6 +15,18 @@ h3{
     backdrop-filter: blur(15px);
 }
 
+.row-obFunc{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;    
+}
+
+strong{
+    font-size: 25px;
+    margin-right: 10px;
+}
+
 /* INPUT:TEXT */
 .row-Container{
     display: flex;
@@ -26,17 +38,20 @@ h3{
   
   .input-container {
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 20px;
     vertical-align: middle;
     position: relative;
-    flex: 0 0 auto
+    flex: 0 0 auto;
+    padding-right: 2px;
   }
   
   .inputNumber {
     padding: 2px 3px;
+    margin-right: 3px;
     color: var(--colo1r-azul-grisaceo-oscuro);
     height: auto;
-    width: 50px;
+    width: 65px;
+    font-size: 20px;
     letter-spacing: 1px;
     border: 1px solid transparent;
     border-bottom-color: var(--color-gris-claro);
