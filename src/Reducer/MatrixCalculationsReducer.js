@@ -16,12 +16,15 @@ import {
 export const variablesReducer = (initialState=[], action)=>{
     switch (action.type) {
         case ADD_VARIABLE:
-            return;
+            console.log("add varaible", initialState);
+            return [...initialState, action.payload];
         case REMOVE_VARIABLE:
-            return;
+            console.log("remove varaible", initialState);
+            return [...initialState, action.payload];;
         default:
+            console.log("default varaible", initialState);
             return initialState;
-    }
+    } 
 }
 
 export const restrictionsReducer = (initialState=[], action)=>{

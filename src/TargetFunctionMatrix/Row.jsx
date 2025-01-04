@@ -1,7 +1,11 @@
-import React from 'react'
-
-export const Row_variable = () => {
+export const Row = ({objectiveFunction}) => {
+  console.log(objectiveFunction);
   return (
-    <div>Row_variable</div>
+    <div className="row-Container">
+      <div className="input-container">
+        <input className="inputNumber" type="number" defaultValue={1}/>
+        <span className="focus-border"><i></i></span>
+      </div>  
+    </div>
   )
 }
