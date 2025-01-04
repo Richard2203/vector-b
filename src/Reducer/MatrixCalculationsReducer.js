@@ -13,7 +13,18 @@ import {
     GET_Z 
 } from './actionTypes';
 
-export const restricVarReducer = (initialState=[], action)=>{
+export const variablesReducer = (initialState=[], action)=>{
+    switch (action.type) {
+        case ADD_VARIABLE:
+            return;
+        case REMOVE_VARIABLE:
+            return;
+        default:
+            return initialState;
+    }
+}
+
+export const restrictionsReducer = (initialState=[], action)=>{
     switch (action.type) {
         case ADD_VARIABLE:
             return;

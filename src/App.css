@@ -136,3 +136,81 @@ h1{
   transform: translateY(2px);
 }
 
+/* INPUT:TEXT */
+.row-Container{
+  display: flex;
+  padding: .5rem 0;
+  align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.input-container {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+  position: relative;
+  flex: 0 0 auto
+}
+
+.inputNumber {
+  padding: 2px 3px;
+  color: var(--colo1r-azul-grisaceo-oscuro);
+  height: auto;
+  width: 50px;
+  letter-spacing: 1px;
+  border: 1px solid transparent;
+  border-bottom-color: var(--color-gris-claro);
+  background-color: var(--color-blanco-suave);
+  transition: 0.4s;
+  outline: none;
+}
+
+.inputNumber:focus {
+  border-bottom-color: var(---color-guinda-claro);
+}
+
+.inputNumber ~ .focus-border:before,
+.inputNumber ~ .focus-border:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-guinda-claro);
+  transition: 0.3s;
+}
+.inputNumber ~ .focus-border:after {
+  top: auto;
+  bottom: 0;
+  left: auto;
+  right: 0;
+}
+.inputNumber ~ .focus-border i:before,
+.inputNumber ~ .focus-border i:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background-color: var(--color-guinda-claro);
+  transition: 0.4s;
+}
+.inputNumber ~ .focus-border i:after {
+  left: auto;
+  right: 0;
+  top: auto;
+  bottom: 0;
+}
+.inputNumber:focus ~ .focus-border:before,
+.inputNumber:focus ~ .focus-border:after {
+  width: 100%;
+  transition: 0.3s;
+}
+.inputNumber:focus ~ .focus-border i:before,
+.inputNumber:focus ~ .focus-border i:after {
+  height: 100%;
+  transition: 0.4s;
+}

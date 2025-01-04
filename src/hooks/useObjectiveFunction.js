@@ -1,40 +1,37 @@
 import { useEffect, useReducer } from 'react';
-import { optimalSolutionReducer } from '../Reducer/MatrixCalculationsReducer';
+import { variablesReducer } from '../Reducer/MatrixCalculationsReducer';
+import { ADD_VARIABLE, REMOVE_VARIABLE } from '../Reducer/actionTypes';
 
-export const useObjectiveFunction = () => {
-    const initialState = [];
+export const useObjectiveFunction = ( { initial = [] } ) => {
+    const initialObjectiveFunction = initial;
 
     const init = () => {
-        return JSON.parse(localStorage.getItem('optimalSolution')) || [];
+        return JSON.parse(localStorage.getItem('objectiveFunction')) || [];
     }
 
-    const [optimalSolution, dispatchOptimalSolution] = useReducer(optimalSolutionReducer, initialState, init);
+    const [objectiveFunction, dispatchObjectiveFunction] = useReducer(variablesReducer, initialObjectiveFunction, init);
 
     useEffect(() => {
-        localStorage.setItem('optimalSolution', JSON.stringify(optimalSolution));
-    }, [optimalSolution]);
+        localStorage.setItem('objectiveFunction', JSON.stringify(objectiveFunction));
+    }, [objectiveFunction]);
 
-    const handleNewTodo = (todo) => {
-        dispatchOptimalSolution({
-            type: '[TODO] Add Todo',
-            payload: todo,
+    const handleAddVariable = (variable) => {
+        dispatchObjectiveFunction({
+            type: ADD_VARIABLE,
+            payload: variable,
         });
     };
 
-    const handleDeleteTodo = (id) => {
-        dispatchOptimalSolution({
-            type:'[TODO] Delete Todo',
-            payload: id,
-        });
-    };
-
-    const handleTogoTodo=(id)=>{
-        dispatchOptimalSolution({
-            type:'[TODO] Toggle Todo',
-            payload: id,
+    const handleRemoveVariable = () => {
+        dispatchObjectiveFunction({
+            type:REMOVE_VARIABLE
         });
     };
 
     return {
+        ...objectiveFunction,
+        objectiveFunction,
+        handleAddVariable,
+        handleRemoveVariable,
     };
 };
