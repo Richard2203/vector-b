@@ -1,4 +1,6 @@
 import './App.css'
+import { Matrix } from './TargetFunctionMatrix/Matrix'
+import { ObjectiveFunction } from './TargetFunctionMatrix/ObjectiveFunction'
 
 function App() {
 
@@ -7,16 +9,14 @@ function App() {
       <div id="main-container">
       </div>
       <div id="content">
-        <h1>
-          Analisis de Sensibilidad - Cambios en el Vector B
-        </h1>
-        {/* <button class="button button-calculate" role="button">Button 30</button>
-        <button class="button button-delete" role="button">-</button>
-        <button class="button button-add" role="button">+</button> */}
+        <h1>Analisis de Sensibilidad - Cambios en el Vector B</h1>
+        <ObjectiveFunction/>
+        <Matrix />
       </div>
-    </>
+    </> 
     
   )
 }
 
 export default App
+ 
