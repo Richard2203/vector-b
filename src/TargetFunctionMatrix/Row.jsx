@@ -1,9 +1,4 @@
 export const Row = ({ functObjec, handleFunctionObjectChange }) => {
-  // const handleInputChange = (event, index) => {
-  //   const value = event.target.value;
-  //   handleFunctionObjectChange(index, parseFloat(value));
-  // };
-
   return (
     <div className="row-Container">
       {functObjec.map((number, index) => (

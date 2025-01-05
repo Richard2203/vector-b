@@ -7,7 +7,6 @@ const init = (initialState) => {
 };
 
 export const useMatrix = (initialState = {}) => {
-    console.log(initialState);
     const [matrix, dispatch] = useReducer(
         matrixReducer, 
         initialState, 

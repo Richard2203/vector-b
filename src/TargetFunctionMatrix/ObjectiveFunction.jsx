@@ -1,30 +1,9 @@
-import { useMatrix } from '../hooks/useObjectiveFunction';
 import { Row } from './Row';
 import './styles_TFM.css';
 
-const initialState = {
-  FunctionObject: [3, 2, 1],
-  Restrictions: [
-    [1, 0, 1],
-    [1, -1, 0],
-    [0, 0, 3],
-  ],
-};
+export const ObjectiveFunction = ({matrix, handleFunctionObjectChange, handleRemoveVariable, handleAddVariable }) => {
 
-export const ObjectiveFunction = () => {
-  console.log(initialState);
-  const {
-    matrix,
-    handleAddRestriction,
-    handleRmoveRestriction,  
-    handleAddVariable,
-    handleRemoveVariable,
-    handleFunctionObjectChange,
-    handleRestrictionChange, } = useMatrix(initialState);
-  
   const { FunctionObject } = matrix;
-
-  console.log(matrix);
   return (
     <>
       <h3>Función Objetivo</h3>

@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const Restrictions = () => {
+export const Restrictions = ({handleAddRestriction, handleRmoveRestriction, handleRestrictionChange } ) => {
   return (
-    <div>Restrictions</div>
+    <>
+      
+    </>
   )
 }
