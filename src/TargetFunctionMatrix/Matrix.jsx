@@ -1,7 +1,7 @@
 import React from 'react'
-import { useMatrix } from '../hooks/useObjectiveFunction';
+import { useMatrix } from '../hooks/useMatrix';
 import { ObjectiveFunction } from './ObjectiveFunction';
-import { Restrictions } from './Restrictions';
+import { Restriction } from './Restriction';
 
 const initialState = {
   FunctionObject: [3, 2, 1],
@@ -21,20 +21,26 @@ export const Matrix = () => {
     handleRemoveVariable,
     handleFunctionObjectChange,
     handleRestrictionChange, } = useMatrix(initialState);
-  return (
-    <>
-      <ObjectiveFunction 
-        matrix = { matrix } 
-        handleFunctionObjectChange = { handleFunctionObjectChange }
-        handleRemoveVariable = { handleRemoveVariable }
-        handleAddVariable = { handleAddVariable }
-      />
+  
+  const { FunctionObject, Restrictions } = matrix;
 
-      <Restrictions 
-        handleAddRestriction = { handleAddRestriction }
-        handleRmoveRestriction = { handleRmoveRestriction }
-        handleRestrictionChange = { handleRestrictionChange }
-      />
-    </>
+  return (
+    <div className='site-container'>
+      <div className='card'>
+        <ObjectiveFunction 
+          FunctionObject = { FunctionObject } 
+          handleFunctionObjectChange = { handleFunctionObjectChange }
+          handleRemoveVariable = { handleRemoveVariable }
+          handleAddVariable = { handleAddVariable }
+        />
+
+        <Restriction 
+          Restrict = { Restrictions }
+          handleAddRestriction = { handleAddRestriction }
+          handleRmoveRestriction = { handleRmoveRestriction }
+          handleRestrictionChange = { handleRestrictionChange }
+        />
+      </div>
+    </div>
   )
 }

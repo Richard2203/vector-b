@@ -14,38 +14,6 @@ import {
     GET_Z, 
 } from './actionTypes';
 
-export const variablesReducer = (initialState=[], action)=>{
-    switch (action.type) {
-        case ADD_VARIABLE:
-            return [...initialState, action.payload];
-        case REMOVE_VARIABLE:      
-            return state.length > 0 ? state.slice(0, -1) : state;  // Elimina el último elemento si hay alguno
-        case UPDATE_VARIABLE: // Nuevo caso para actualizar un valor
-            const { index, newValue } = action.payload;
-            return state.map((item, idx) =>
-                idx === index ? newValue : item
-            );
-        default:
-            return initialState;
-    } 
-}
-
-
-export const restrictionsReducer = (initialState=[], action)=>{
-    switch (action.type) {
-        case ADD_VARIABLE:
-            return;
-        case REMOVE_VARIABLE:
-            return;
-        case ADD_RESTRICTION:
-            return;
-        case REMOVE_RESTRICTION:
-            return;
-        default:
-            return initialState;
-    }
-}
-
 export const optimalSolutionReducer = (initialState=[], action)=>{
     switch (action.type) {
         case XB:
@@ -77,11 +45,14 @@ export const dualSimpleReducer = (initialState=[], action)=>{
 export const matrixReducer = (state = {}, action) => {
     switch (action.type) {
         case ADD_RESTRICTION:
+            const newArrayLength = state.Restrictions[0].length;
+            const newArray = Array.from({ length: newArrayLength }, () => 0);
             return {
                 ...state,
-                Restrictions: [...state.Restrictions, action.payload],
+                Restrictions: [...state.Restrictions, newArray],
             };
-        case REMOVE_RESTRICTION:      
+        case REMOVE_RESTRICTION:  
+            if( state.Restrictions.length <= 1 ) return state;    
             return {
                 ...state,
                 Restrictions: state.Restrictions.slice(0, -1),

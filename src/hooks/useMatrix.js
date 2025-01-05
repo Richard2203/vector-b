@@ -17,10 +17,9 @@ export const useMatrix = (initialState = {}) => {
         localStorage.setItem('matrix', JSON.stringify(matrix));
     }, [matrix]);
 
-    const handleAddRestriction = (number) => {
+    const handleAddRestriction = () => {
         dispatch({
-            type: ADD_RESTRICTION,
-            payload: number,
+            type: ADD_RESTRICTION
         })
     };
 

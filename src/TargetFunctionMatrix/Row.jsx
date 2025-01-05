@@ -1,4 +1,4 @@
-export const Row = ({ functObjec, handleFunctionObjectChange }) => {
+export const Row = ({ functObjec, handleChange}) => {
   return (
     <div className="row-Container">
       {functObjec.map((number, index) => (
@@ -8,7 +8,7 @@ export const Row = ({ functObjec, handleFunctionObjectChange }) => {
               className="inputNumber"
               type="number"
               value={number}
-              onChange={(e) => handleFunctionObjectChange(index, parseFloat(e.target.value))}
+              onChange={(e) => handleChange(index, parseFloat(e.target.value))}
             />
             <span className="focus-border"><i></i></span>
             X <sub>{index + 1}</sub>
