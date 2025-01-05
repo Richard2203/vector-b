@@ -10,24 +10,27 @@ export const Restriction = ({Restrict, handleAddRestriction, handleRmoveRestrict
   return (
     <>
       <h3>Restricciones</h3>
-      <button 
+      <div style={{marginLeft:'20px'}}>
+        <button 
+            type="button" 
+            className='button button-delete button-delete-restriction'
+            onClick={handleRmoveRestriction}> Remover Restricción </button>
+        <button 
           type="button" 
-          className='button button-delete'
-          onClick={handleRmoveRestriction}> Remover Restricción </button>
-      <button 
-        type="button" 
-        className='button button-add'
-        onClick={handleAddRestriction}> Añadir Restricción </button>
+          className='button button-add'
+          onClick={handleAddRestriction}> Añadir Restricción </button>
 
-      {
-        Restrict.map((fila, i) =>(
-          <Row 
-            key = { i } 
-            functObjec = { fila } 
-            handleChange = { handleChangeModify(i) } />
-        )
-        )
-      }
+        {
+          Restrict.map((fila, i) =>(
+            <Row 
+              key = { i } 
+              functObjec = { fila } 
+              handleChange = { handleChangeModify(i) }
+              isRestrictionRow = { true } />
+          )
+          )
+        }
+      </div>
     </>
   )
 }

@@ -1,15 +1,16 @@
 import { Row } from './Row';
-import './styles_TFM.css';
 
 export const ObjectiveFunction = ({FunctionObject, handleFunctionObjectChange, handleRemoveVariable, handleAddVariable }) => {
   return (
-    <>
+    <div style={{marginBottom:'30px'}}>
       <h3>Función Objetivo</h3>
       <div className="row-obFunc">
         <strong> MaxZ </strong>
         <Row key={1} 
           functObjec = { FunctionObject }
-          handleChange = { handleFunctionObjectChange }/>
+          handleChange = { handleFunctionObjectChange }
+          isRestrictionRow = { false }
+          />
         <button 
           type="button" 
           className='button button-delete'
@@ -19,6 +20,6 @@ export const ObjectiveFunction = ({FunctionObject, handleFunctionObjectChange, h
           className='button button-add'
           onClick = { handleAddVariable }> + </button>
       </div>
-    </>
+    </div>
   )
 }

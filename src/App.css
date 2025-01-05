@@ -86,6 +86,10 @@ h1{
     rgba(200, 50, 50, 0.6) 0 -3px 0 inset;
 }
 
+.button-delete-restriction{
+  margin-right: 10px;
+}
+
 .button-delete:focus {
   box-shadow: rgba(255, 77, 77, 0.7) 0 0 0 1.5px inset, 
     rgba(255, 77, 77, 0.5) 0 2px 4px, 

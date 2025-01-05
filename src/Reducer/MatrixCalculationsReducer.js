@@ -45,7 +45,7 @@ export const dualSimpleReducer = (initialState=[], action)=>{
 export const matrixReducer = (state = {}, action) => {
     switch (action.type) {
         case ADD_RESTRICTION:
-            const newArrayLength = state.Restrictions[0].length;
+            const newArrayLength = state.FunctionObject.length + 1;
             const newArray = Array.from({ length: newArrayLength }, () => 0);
             return {
                 ...state,
