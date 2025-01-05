@@ -1,26 +1,40 @@
-import { useObjectiveFunction } from '../hooks/useObjectiveFunction';
+import { useMatrix } from '../hooks/useObjectiveFunction';
 import { Row } from './Row';
 import './styles_TFM.css';
 
+const initialState = {
+  FunctionObject: [3, 2, 1],
+  Restrictions: [
+    [1, 0, 1],
+    [1, -1, 0],
+    [0, 0, 3],
+  ],
+};
+
 export const ObjectiveFunction = () => {
+  console.log(initialState);
   const {
-    objectiveFunction,
+    matrix,
+    handleAddRestriction,
+    handleRmoveRestriction,  
     handleAddVariable,
-    handleRemoveVariable, 
-    handleUpdateVariable } = useObjectiveFunction({
-      objeFunct: [3,2,1]
-    });
-  console.log(objectiveFunction);
+    handleRemoveVariable,
+    handleFunctionObjectChange,
+    handleRestrictionChange, } = useMatrix(initialState);
+  
+  const { FunctionObject } = matrix;
+
+  console.log(matrix);
   return (
     <>
-    <h3>Función Objetivo</h3>
-    <div className="site-container">
+      <h3>Función Objetivo</h3>
+      <div className="site-container">
         <div className="card">
           <div className="row-obFunc">
             <strong> MaxZ </strong>
             <Row key={1} 
-              objectiveFunction={objectiveFunction} 
-              handleUpdateVariable={handleUpdateVariable}/>
+              functObjec={FunctionObject}
+              handleFunctionObjectChange={handleFunctionObjectChange}/>
             <button 
               type="button" 
               className='button button-delete'

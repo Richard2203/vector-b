@@ -1,47 +1,79 @@
 import { useEffect, useReducer } from 'react';
-import { ADD_VARIABLE, REMOVE_VARIABLE, UPDATE_VARIABLE } from '../Reducer/actionTypes';
-import { variablesReducer } from '../Reducer/MatrixCalculationsReducer';
+import { ADD_RESTRICTION, ADD_VARIABLE, REMOVE_RESTRICTION, REMOVE_VARIABLE, UPDATE_VARIABLE } from '../Reducer/actionTypes';
+import { matrixReducer } from '../Reducer/MatrixCalculationsReducer';
 
-const init = (initialObjectiveFunction) => { 
-    return JSON.parse(localStorage.getItem('objectiveFunction')) || initialObjectiveFunction;
+const init = (initialState) => { 
+    return JSON.parse(localStorage.getItem('matrix')) || initialState;
 };
 
-export const useObjectiveFunction = (initialObjectiveFunction) => {
-    console.log(initialObjectiveFunction);
-    const [objectiveFunction, dispatchObjectiveFunction] = useReducer(
-        variablesReducer, 
-        initialObjectiveFunction, 
+export const useMatrix = (initialState = {}) => {
+    console.log(initialState);
+    const [matrix, dispatch] = useReducer(
+        matrixReducer, 
+        initialState, 
         init
     );
 
     useEffect(() => {
-        localStorage.setItem('objectiveFunction', JSON.stringify(objectiveFunction));
-    }, [objectiveFunction]);
+        localStorage.setItem('matrix', JSON.stringify(matrix));
+    }, [matrix]);
 
+    const handleAddRestriction = (number) => {
+        dispatch({
+            type: ADD_RESTRICTION,
+            payload: number,
+        })
+    };
+
+    const handleRmoveRestriction = () => {
+        dispatch({
+            type: REMOVE_RESTRICTION,
+        })
+    };
+    
     const handleAddVariable = () => {
-        dispatchObjectiveFunction({
+        dispatch({
             type: ADD_VARIABLE,
-            payload: 0,
         });
     };
 
     const handleRemoveVariable = () => {
-        dispatchObjectiveFunction({
+        dispatch({
             type: REMOVE_VARIABLE,
         });
     };
 
-    const handleUpdateVariable = (index, newValue) => {
-        dispatchObjectiveFunction({
-          type: UPDATE_VARIABLE,
-          payload: { index, newValue },
+    const handleFunctionObjectChange = (index, value) => {
+        dispatch({ 
+            type: UPDATE_VARIABLE, 
+            payload: { 
+                type: "FunctionObject", 
+                index, 
+                value: parseFloat(value) || 0 
+            } 
         });
-      };
+    };
+    
+    const handleRestrictionChange = (row, col, value) => {
+        dispatch({ 
+            type: UPDATE_VARIABLE, 
+            payload: { 
+                type: "Restrictions", 
+                row, 
+                col, 
+                value: parseFloat(value) || 0 
+            } 
+        });
+    };
 
     return {
-        objectiveFunction,
+        ...matrix,
+        matrix,
+        handleAddRestriction,
+        handleRmoveRestriction,  
         handleAddVariable,
         handleRemoveVariable,
-        handleUpdateVariable,
+        handleFunctionObjectChange,
+        handleRestrictionChange,
     };
 };

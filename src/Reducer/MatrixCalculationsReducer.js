@@ -30,6 +30,7 @@ export const variablesReducer = (initialState=[], action)=>{
     } 
 }
 
+
 export const restrictionsReducer = (initialState=[], action)=>{
     switch (action.type) {
         case ADD_VARIABLE:
@@ -72,3 +73,46 @@ export const dualSimpleReducer = (initialState=[], action)=>{
             return initialState;
     }
 }
+
+export const matrixReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADD_RESTRICTION:
+            return {
+                ...state,
+                Restrictions: [...state.Restrictions, action.payload],
+            };
+        case REMOVE_RESTRICTION:      
+            return {
+                ...state,
+                Restrictions: state.Restrictions.slice(0, -1),
+            };
+        case ADD_VARIABLE:
+            return {
+                ...state,
+                FunctionObject: [...state.FunctionObject, 0],
+                Restrictions: state.Restrictions.map(restriction => [...restriction, 0]),
+            };
+        case REMOVE_VARIABLE:
+            if (state.FunctionObject.length <= 2) return state
+            return {
+                ...state,
+                FunctionObject: state.FunctionObject.slice(0, -1),
+                Restrictions: state.Restrictions.map(restriction => restriction.slice(0, -1)),
+            };
+        case UPDATE_VARIABLE:
+            if (action.payload.type === "FunctionObject") {
+                const updatedFunctionObject = [...state.FunctionObject];
+                updatedFunctionObject[action.payload.index] = action.payload.value;
+                return { ...state, FunctionObject: updatedFunctionObject };
+            }
+        
+            if (action.payload.type === "Restrictions") {
+                const updatedRestrictions = [...state.Restrictions];
+                updatedRestrictions[action.payload.row][action.payload.col] = action.payload.value;
+                return { ...state, Restrictions: updatedRestrictions };
+            }
+            return state;
+        default:
+            return state;
+    };
+};
