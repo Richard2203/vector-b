@@ -3,6 +3,7 @@ import { useMatrix } from '../hooks/useMatrix';
 import { ObjectiveFunction } from './ObjectiveFunction';
 import { Restriction } from './Restriction';
 import './styles_TFM.css';
+import { BRow } from './BRow';
 
 const initialState = {
   FunctionObject: [3, 2, 1],
@@ -22,9 +23,10 @@ export const Matrix = () => {
     handleAddVariable,
     handleRemoveVariable,
     handleFunctionObjectChange,
-    handleRestrictionChange, } = useMatrix(initialState);
+    handleRestrictionChange,
+    handleBRowChange, } = useMatrix(initialState);
   
-  const { FunctionObject, Restrictions } = matrix;
+  const { FunctionObject, Restrictions, changeRow } = matrix;
 
   return (
     <div className='site-container'>
@@ -42,10 +44,10 @@ export const Matrix = () => {
             handleAddRestriction = { handleAddRestriction }
             handleRmoveRestriction = { handleRmoveRestriction }
             handleRestrictionChange = { handleRestrictionChange }
-          />
+          /> 
         </div>
         <div className="right-Content">
-            
+          <BRow changeRow={changeRow} handleBRowChange={handleBRowChange}/>
         </div>
       </div>
     </div>

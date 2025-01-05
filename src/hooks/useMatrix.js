@@ -64,6 +64,17 @@ export const useMatrix = (initialState = {}) => {
         });
     };
 
+    const handleBRowChange = (index, value) => {
+        dispatch({ 
+            type: UPDATE_VARIABLE, 
+            payload: { 
+                type: "BRow", 
+                index, 
+                value: parseFloat(value) || 0 
+            } 
+        });
+    };    
+
     return {
         ...matrix,
         matrix,
@@ -73,5 +84,6 @@ export const useMatrix = (initialState = {}) => {
         handleRemoveVariable,
         handleFunctionObjectChange,
         handleRestrictionChange,
+        handleBRowChange,
     };
 };

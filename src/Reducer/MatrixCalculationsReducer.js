@@ -82,6 +82,13 @@ export const matrixReducer = (state = {}, action) => {
                 updatedRestrictions[action.payload.row][action.payload.col] = action.payload.value;
                 return { ...state, Restrictions: updatedRestrictions };
             }
+
+            if (action.payload.type === "BRow") {
+                const updatedBRow = [...state.changeRow];
+                updatedBRow[action.payload.index] = action.payload.value;
+                return { ...state, changeRow: updatedBRow };
+            }
+
             return state;
         default:
             return state;

@@ -4,28 +4,37 @@
 }
 
 .card {
-    padding: 35px;
-    border: 1px solid rgba(255, 255, 255, .25);
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.45);
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(15px);
+  padding: 35px;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 
-    display: flex; 
-    flex-wrap: wrap;
-    gap: 35px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px;
 }
 
-.left-content { flex: 1 1 calc(65% - 17.5px); }
-.right-content { flex: 1 1 calc(35% - 17.5px); }
-
-@media (max-width: 768px) { 
-  .left-content, 
-  .right-content { 
-    flex: 1 1 100%; 
-  } 
-  .right-content { order: -1; }
+.left-content {
+  flex: 1 1 65%;
 }
+
+.right-content {
+  flex: 1 1 35%;
+}
+
+@media (max-width: 768px) {
+  .left-content,
+  .right-content {
+    flex: 1 1 100%;
+  }
+  .right-content {
+    order: -1;
+  }
+}
+
 
 .row-obFunc{
     margin-left: 20px;
