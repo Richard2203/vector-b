@@ -1,0 +1,53 @@
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Espaciado entre filas */
+    font-family: Arial, sans-serif;
+    text-align: left;
+    background-color: #f9f9f9; /* Fondo claro */
+  }
+  
+  thead th {
+    padding: 10px;
+    background-color: #e9e9e9; /* Fondo gris claro para encabezados */
+    color: #555555; /* Texto gris oscuro */
+    font-weight: bold;
+    border-bottom: 2px solid #ddd; /* Línea inferior */
+  }
+  
+  tbody tr {
+    background-color: #ffffff; /* Fondo blanco para las filas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para filas */
+  }
+  
+  tbody td {
+    padding: 10px;
+    vertical-align: middle;
+    border: none;
+    color: #333333; /* Texto gris oscuro */
+  }
+  
+  tbody td:first-child {
+    font-weight: bold;
+  }
+  
+  tbody tr td input[type="text"],
+  tbody tr td input[type="number"] {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #555555; /* Texto gris oscuro */
+    text-align: left;
+  }
+  
+  tbody tr td input[type="text"]:focus,
+  tbody tr td input[type="number"]:focus {
+    border-bottom: 1px solid #666666; /* Línea inferior visible al enfocar */
+  }
+  
+  tbody tr:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el mouse */
+  }
+  
