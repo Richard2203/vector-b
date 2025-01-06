@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useMatrix } from '../hooks/useMatrix';
 import { ObjectiveFunction } from './ObjectiveFunction';
 import { Restriction } from './Restriction';
@@ -15,7 +15,7 @@ const initialState = {
   changeRow: [4,2,3],
 };
 
-export const Matrix = () => {
+export const Matrix = ({setTablaSize}) => {
   const {
     matrix,
     handleAddRestriction,
@@ -27,6 +27,10 @@ export const Matrix = () => {
     handleBRowChange, } = useMatrix(initialState);
   
   const { FunctionObject, Restrictions, changeRow } = matrix;
+  
+  useEffect(() => {
+    setTablaSize([FunctionObject.length, Restrictions.length]);
+  }, [FunctionObject, Restrictions]);
 
   return (
     <div className='site-container'>

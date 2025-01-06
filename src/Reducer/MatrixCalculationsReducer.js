@@ -15,7 +15,8 @@ import {
     GET_Z,
     UPDATE_VALUE,
     UPDATE_TYPE,
-    UPDATE_INDEX, 
+    UPDATE_INDEX,
+    UPDATE_TABLE, 
 } from './actionTypes';
 
 export const optimalSolutionReducer = (state = {}, action)=>{
@@ -44,7 +45,29 @@ export const optimalSolutionReducer = (state = {}, action)=>{
         nuevoIndice !== "" ? parseInt(nuevoIndice, 10) : null;
       return { ...state, filas: nuevasFilasIndice };
     }
-  
+    
+    case UPDATE_TABLE: {
+      const columnas = ["Ecuación"]; 
+      for (let i = 1; i <= action.payload.VariablesNumber; i++) 
+        columnas.push(`X${i}`); 
+
+      for (let i = 1; i <= action.payload.RestrictionsNumber; i++) 
+        columnas.push(`S${i}`); 
+      
+      columnas.push("Sol"); 
+      
+      const filas = []; 
+      for (let i = 0; i <= action.payload.RestrictionsNumber; i++) { 
+        filas.push({ 
+          tipo: i === 0 ? 'Z' : 'S', 
+          indice: i === 0 ? null : i, 
+          valores: new Array(
+            action.payload.VariablesNumber + action.payload.RestrictionsNumber + 1).fill("0") 
+        }); 
+      } 
+      return { ...state, columnas, filas }; 
+    }
+
     case XB: {
       // Implementación para XB
       return state;

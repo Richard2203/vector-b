@@ -12,6 +12,7 @@ export const Z = '[OPSolution] Calculate Z';
 export const UPDATE_VALUE = '[OPSolution] Update Value';
 export const UPDATE_TYPE = '[OPSolution] Update Type';
 export const UPDATE_INDEX = '[OPSolution] Update Index';
+export const UPDATE_TABLE = '[OPSolution] Update Table';
 
 // CALCULATE DUAL SIMPLEX
 export const SEARCH_LARGEST_NEGATIVE='[DUAL_SIMPLEX] Largest negative number';

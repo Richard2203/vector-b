@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Fraction from "fraction.js";
 import { useOptimalSolution } from '../hooks/useOptimalSolution';
+
+
+// Función para crear el estado inicial basado en tablaSize 
+function createInitialTableState(variablesNumber, restrictionsNumber) { 
+	
+};
 
 const initialTableState = {
   columnas: ["Ecuación", "X1", "X2", "X3", "S1", "S2", "S3", "Sol"],
@@ -28,12 +34,20 @@ const initialTableState = {
   ],
 };
 
-export const Table = () => {
+export const Table = ({tablaSize}) => {
 	const {optimalSolution,
 		handleUpdateType,
 		handleUpdateIndex,
-		handleUpdateValue,} = useOptimalSolution(initialTableState);
-		console.log(optimalSolution);
+		handleUpdateValue,
+		handleUpdateTable, } = useOptimalSolution(initialTableState);
+	
+		useEffect(() => { 
+			handleUpdateTable(tablaSize[0], tablaSize[1]); 
+		}, [tablaSize]);
+		
+	console.log(tablaSize);
+	console.log(optimalSolution);
+
 	return (
 	  <table border="1">
 		<thead>
@@ -77,4 +91,4 @@ export const Table = () => {
 		</tbody>
 	  </table>
 	);
-  };
+};

@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import { optimalSolutionReducer } from '../Reducer/MatrixCalculationsReducer';
-import { UPDATE_INDEX, UPDATE_TYPE, UPDATE_VALUE } from '../Reducer/actionTypes';
+import { UPDATE_INDEX, UPDATE_TABLE, UPDATE_TYPE, UPDATE_VALUE } from '../Reducer/actionTypes';
 
 const init = (initialTableState) => {
   const storedState = JSON.parse(localStorage.getItem('optimalSolution')) || initialTableState;
@@ -31,8 +31,11 @@ export const useOptimalSolution = (initialTableState = {} ) => {
 	const handleUpdateIndex = (filaIndex, e) => {
 		dispatch({
 			type: UPDATE_INDEX,
-			payload: { filaIndex, nuevoIndice: e.target.value },
-		})
+			payload: { 
+				filaIndex, 
+				nuevoIndice: e.target.value 
+			},
+		});
 	};
 
 	const handleUpdateValue = (filaIndex, valorIndex, e) => {
@@ -43,7 +46,17 @@ export const useOptimalSolution = (initialTableState = {} ) => {
 				valorIndex,
 				nuevoValor: e.target.value,
 			},
-			})
+		});
+	};
+
+	const handleUpdateTable = (VariablesNumber, RestrictionsNumber) =>{
+		dispatch({
+			type: UPDATE_TABLE,
+			payload: {
+				VariablesNumber,
+				RestrictionsNumber,
+			}
+		});
 	};
 
 	return {
@@ -52,5 +65,6 @@ export const useOptimalSolution = (initialTableState = {} ) => {
 		handleUpdateType,
 		handleUpdateIndex,
 		handleUpdateValue,
+		handleUpdateTable,
 	};
 };
