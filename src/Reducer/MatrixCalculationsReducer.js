@@ -20,35 +20,49 @@ import {
 
 export const optimalSolutionReducer = (state = {}, action)=>{
   switch (action.type) {
-    case UPDATE_VALUE:
+    case UPDATE_VALUE: {
       const { filaIndex, valorIndex, nuevoValor } = action.payload;
       const nuevasFilasValor = [...state.filas];
-      try {
-        const fraccion = new Fraction(nuevoValor);
-        nuevasFilasValor[filaIndex].valores[valorIndex] = fraccion;
-      } catch {
-        nuevasFilasValor[filaIndex].valores[valorIndex] = nuevoValor;
-      }
+      // Asignamos el valor directamente como cadena
+      nuevasFilasValor[filaIndex].valores[valorIndex] = nuevoValor;
       return { ...state, filas: nuevasFilasValor };
-
-    case UPDATE_TYPE:
+    }
+  
+    case UPDATE_TYPE: {
       const { filaIndex: tipoFilaIndex, nuevoTipo } = action.payload;
       const nuevasFilasTipo = [...state.filas];
+      // Actualizamos el tipo como cadena
       nuevasFilasTipo[tipoFilaIndex].tipo = nuevoTipo;
       return { ...state, filas: nuevasFilasTipo };
-
-    case UPDATE_INDEX:
+    }
+  
+    case UPDATE_INDEX: {
       const { filaIndex: indiceFilaIndex, nuevoIndice } = action.payload;
       const nuevasFilasIndice = [...state.filas];
+      // Actualizamos el índice como número o null si está vacío
       nuevasFilasIndice[indiceFilaIndex].indice =
-        nuevoIndice ? parseInt(nuevoIndice) : null;
+        nuevoIndice !== "" ? parseInt(nuevoIndice, 10) : null;
       return { ...state, filas: nuevasFilasIndice };
-    case XB: return;
-    case isFACTIBLE: return;
-    case Z: return;
+    }
+  
+    case XB: {
+      // Implementación para XB
+      return state;
+    }
+  
+    case isFACTIBLE: {
+      // Implementación para verificar factibilidad
+      return state;
+    }
+  
+    case Z: {
+      // Implementación para Z
+      return state;
+    }
+  
     default:
       return state;
-  }
+  }  
 };
 
 export const dualSimpleReducer = (initialState=[], action)=>{
