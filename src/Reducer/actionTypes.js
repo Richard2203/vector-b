@@ -9,6 +9,9 @@ export const UPDATE_VARIABLE = '[DRAW_MATRIX] UPDATE_VARIABLE';
 export const XB = '[OPSolution] Calculate Xb'; 
 export const isFACTIBLE = '[OPSolution] Is Factible';
 export const Z = '[OPSolution] Calculate Z';
+export const UPDATE_VALUE = '[OPSolution] Update Value';
+export const UPDATE_TYPE = '[OPSolution] Update Type';
+export const UPDATE_INDEX = '[OPSolution] Update Index';
 
 // CALCULATE DUAL SIMPLEX
 export const SEARCH_LARGEST_NEGATIVE='[DUAL_SIMPLEX] Largest negative number';

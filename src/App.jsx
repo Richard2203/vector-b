@@ -1,4 +1,5 @@
 import './App.css'
+import { Table } from './Matrix/Table'
 import { Matrix } from './TargetFunctionMatrix/Matrix'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <div id="content">
         <h1>Analisis de Sensibilidad - Cambios en el Vector B</h1>
         <Matrix />
+        <Table/>
       </div>
     </> 
     

@@ -1,40 +1,56 @@
 import { useEffect, useReducer } from 'react';
-import { restricVarReducer } from '../Reducer/MatrixCalculationsReducer';
+import { optimalSolutionReducer } from '../Reducer/MatrixCalculationsReducer';
+import { UPDATE_INDEX, UPDATE_TYPE, UPDATE_VALUE } from '../Reducer/actionTypes';
 
-export const useObjectiveFunction = () => {
-    const initialState = [];
+const init = (initialTableState) => {
+  const storedState = JSON.parse(localStorage.getItem('optimalSolution')) || initialTableState;
+  return storedState;
+};
 
-    const init = () => {
-        return JSON.parse(localStorage.getItem('optimalSolution')) || [];
-    }
+export const useOptimalSolution = (initialTableState = {} ) => {
+	const [optimalSolution, dispatch] = useReducer(
+		optimalSolutionReducer, 
+		initialTableState, 
+		init
+	);
 
-    const [optimalSolution, dispatchOptimalSolution] = useReducer(optimalSolutionReducer, initialState, init);
+	useEffect(() => {
+		localStorage.setItem('optimalSolution', JSON.stringify(optimalSolution));
+	}, [optimalSolution]);
 
-    useEffect(() => {
-        localStorage.setItem('optimalSolution', JSON.stringify(optimalSolution));
-    }, [optimalSolution]);
+	const handleUpdateType = (filaIndex, e) => {
+		dispatch({
+			type: UPDATE_TYPE,
+			payload: { 
+				filaIndex, 
+				nuevoTipo: e.target.value 
+			},
+		});
+	};	
 
-    const handleNewTodo = (todo) => {
-        dispatchOptimalSolution({
-            type: '[TODO] Add Todo',
-            payload: todo,
-        });
-    };
+	const handleUpdateIndex = (filaIndex, e) => {
+		dispatch({
+			type: UPDATE_INDEX,
+			payload: { filaIndex, nuevoIndice: e.target.value },
+		})
+	};
 
-    const handleDeleteTodo = (id) => {
-        dispatchOptimalSolution({
-            type:'[TODO] Delete Todo',
-            payload: id,
-        });
-    };
+	const handleUpdateValue = (filaIndex, valorIndex, e) => {
+		dispatch({
+			type: UPDATE_VALUE,
+			payload: {
+				filaIndex,
+				valorIndex,
+				nuevoValor: e.target.value,
+			},
+			})
+	};
 
-    const handleTogoTodo=(id)=>{
-        dispatchOptimalSolution({
-            type:'[TODO] Toggle Todo',
-            payload: id,
-        });
-    };
-
-    return {
-    };
+	return {
+		...optimalSolution,
+		optimalSolution,
+		handleUpdateType,
+		handleUpdateIndex,
+		handleUpdateValue,
+	};
 };

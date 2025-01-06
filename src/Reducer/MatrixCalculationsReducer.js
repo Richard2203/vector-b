@@ -1,3 +1,4 @@
+import Fraction from 'fraction.js';
 import { 
     ADD_VARIABLE, 
     REMOVE_VARIABLE, 
@@ -11,19 +12,44 @@ import {
     SEARCH_SMALLEST_POSITIVE_QUOTIENT, 
     DIVIDE_BY_ONE, 
     GAUSS_JORDAN, 
-    GET_Z, 
+    GET_Z,
+    UPDATE_VALUE,
+    UPDATE_TYPE,
+    UPDATE_INDEX, 
 } from './actionTypes';
 
-export const optimalSolutionReducer = (initialState=[], action)=>{
-    switch (action.type) {
-        case XB:
-        case isFACTIBLE:
-        case Z:
-           return;
-        default:
-            return initialState;
-    }
-}
+export const optimalSolutionReducer = (state = {}, action)=>{
+  switch (action.type) {
+    case UPDATE_VALUE:
+      const { filaIndex, valorIndex, nuevoValor } = action.payload;
+      const nuevasFilasValor = [...state.filas];
+      try {
+        const fraccion = new Fraction(nuevoValor);
+        nuevasFilasValor[filaIndex].valores[valorIndex] = fraccion;
+      } catch {
+        nuevasFilasValor[filaIndex].valores[valorIndex] = nuevoValor;
+      }
+      return { ...state, filas: nuevasFilasValor };
+
+    case UPDATE_TYPE:
+      const { filaIndex: tipoFilaIndex, nuevoTipo } = action.payload;
+      const nuevasFilasTipo = [...state.filas];
+      nuevasFilasTipo[tipoFilaIndex].tipo = nuevoTipo;
+      return { ...state, filas: nuevasFilasTipo };
+
+    case UPDATE_INDEX:
+      const { filaIndex: indiceFilaIndex, nuevoIndice } = action.payload;
+      const nuevasFilasIndice = [...state.filas];
+      nuevasFilasIndice[indiceFilaIndex].indice =
+        nuevoIndice ? parseInt(nuevoIndice) : null;
+      return { ...state, filas: nuevasFilasIndice };
+    case XB: return;
+    case isFACTIBLE: return;
+    case Z: return;
+    default:
+      return state;
+  }
+};
 
 export const dualSimpleReducer = (initialState=[], action)=>{
     switch (action.type) {
@@ -50,12 +76,14 @@ export const matrixReducer = (state = {}, action) => {
             return {
                 ...state,
                 Restrictions: [...state.Restrictions, newArray],
+                changeRow: [...state.changeRow, 0],
             };
         case REMOVE_RESTRICTION:  
             if( state.Restrictions.length <= 1 ) return state;    
             return {
                 ...state,
                 Restrictions: state.Restrictions.slice(0, -1),
+                changeRow: state.changeRow.slice(0, -1),
             };
         case ADD_VARIABLE:
             return {
