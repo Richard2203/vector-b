@@ -15,7 +15,7 @@ const initialState = {
   changeRow: [4,2,3],
 };
 
-export const Matrix = ({setTablaSize}) => {
+export const Matrix = ({setTablaSize, setChangeVectorB}) => {
   const {
     matrix,
     handleAddRestriction,
@@ -31,6 +31,10 @@ export const Matrix = ({setTablaSize}) => {
   useEffect(() => {
     setTablaSize([FunctionObject.length, Restrictions.length]);
   }, [FunctionObject, Restrictions]);
+
+  useEffect(()=>{
+    setChangeVectorB(changeRow);
+  },[changeRow]);
 
   return (
     <div className='site-container'>

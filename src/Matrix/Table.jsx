@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Fraction from "fraction.js";
 import { useOptimalSolution } from '../hooks/useOptimalSolution';
 import './Matrix.css';
+import { Xb } from './Xb';
 
 const initialTableState = {
   columnas: ["Ecuación", "X1", "X2", "X3", "S1", "S2", "S3", "Sol"],
@@ -27,26 +28,30 @@ const initialTableState = {
       valores: ["0", "0", "1", "0", "0", "1", "4"],
     },
   ],
+  BminusOne:[],
+  XbResult:[]
 };
 
-export const Table = ({tablaSize}) => {
+export const Table = ({tablaSize, changeVectorB}) => {
 	const {optimalSolution,
 		handleUpdateType,
 		handleUpdateIndex,
 		handleUpdateValue,
-		handleUpdateTable, } = useOptimalSolution(initialTableState);
+		handleUpdateTable,
+		handleCalculateXb,
+		handleCalculateZ,
+		handleIsFactible,
+		handleSegmentMatrix, } = useOptimalSolution(initialTableState);
 	
-		useEffect(() => { 
-			handleUpdateTable(tablaSize[0], tablaSize[1]); 
-		}, [tablaSize]);
+	useEffect(() => { 
+		handleUpdateTable(tablaSize[0], tablaSize[1]); 
+	}, [tablaSize]);
+
+	const { BminusOne } = optimalSolution;
 
 	return (
 	 <>
-			<button 
-				type="button" 
-				className='button button-calculate'
-				onClick = { ()=> {} }> Calcular </button>
-			<table border="1">		
+		<table border="1">		
 			<thead>
 				<tr>
 				{optimalSolution.columnas.map((columna, index) => (
@@ -86,7 +91,13 @@ export const Table = ({tablaSize}) => {
 				</tr>
 				))}
 			</tbody>
-	  </table>
+	  	</table>
+
+		<Xb 
+			handleCalculateXb = {handleCalculateXb} 
+			BminusOne =  { BminusOne } 
+			changeVectorB = { changeVectorB }
+			handleSegmentMatrix = {handleSegmentMatrix}/> 
 	 </>
 	);
 };

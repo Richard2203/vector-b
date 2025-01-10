@@ -9,14 +9,8 @@ export const UPDATE_VARIABLE = '[DRAW_MATRIX] UPDATE_VARIABLE';
 export const XB = '[OPSolution] Calculate Xb'; 
 export const isFACTIBLE = '[OPSolution] Is Factible';
 export const Z = '[OPSolution] Calculate Z';
+export const SEGMENT_MATRIX = '[OPSolution] Segment Matrix';
 export const UPDATE_VALUE = '[OPSolution] Update Value';
 export const UPDATE_TYPE = '[OPSolution] Update Type';
 export const UPDATE_INDEX = '[OPSolution] Update Index';
 export const UPDATE_TABLE = '[OPSolution] Update Table';
-
-// CALCULATE DUAL SIMPLEX
-export const SEARCH_LARGEST_NEGATIVE='[DUAL_SIMPLEX] Largest negative number';
-export const SEARCH_SMALLEST_POSITIVE_QUOTIENT='[DUAL_SIMPLEX] Smallest positive number';
-export const DIVIDE_BY_ONE='[DUAL_SIMPLEX] Divide by one';
-export const GAUSS_JORDAN='[DUAL_SIMPLEX] Apply Gauss Jordan';
-export const GET_Z='[DUAL_SIMPLEX] Get Z number';

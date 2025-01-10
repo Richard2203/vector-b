@@ -7,16 +7,12 @@ import {
     UPDATE_VARIABLE,
     XB, 
     isFACTIBLE, 
-    Z, 
-    SEARCH_LARGEST_NEGATIVE, 
-    SEARCH_SMALLEST_POSITIVE_QUOTIENT, 
-    DIVIDE_BY_ONE, 
-    GAUSS_JORDAN, 
-    GET_Z,
+    Z,
     UPDATE_VALUE,
     UPDATE_TYPE,
     UPDATE_INDEX,
-    UPDATE_TABLE, 
+    UPDATE_TABLE,
+    SEGMENT_MATRIX, 
 } from './actionTypes';
 
 export const optimalSolutionReducer = (state = {}, action)=>{
@@ -68,9 +64,68 @@ export const optimalSolutionReducer = (state = {}, action)=>{
       return { ...state, columnas, filas }; 
     }
 
-    case XB: {
-      // Implementación para XB
-      return state;
+    case SEGMENT_MATRIX: {
+      let indexLetterS = 0;
+	  
+      // Encontrar el índice del primer elemento que contenga la letra 'S' en las columnas
+      for (let i = 0; i < state.columnas.length; i++) {
+        if (state.columnas[i].includes('S')) {
+          indexLetterS = i-1; // Guardar el índice
+          break;
+        }
+      }
+      // Índices para segmentar
+      const startIndex = indexLetterS;
+      const endIndex = state.filas[0].valores.length - 1;
+      
+      // Segmentar los valores de cada fila
+      const segmentedMatrix = state.filas.slice(1).map((fila) =>
+        fila.valores.slice(startIndex, endIndex) // Desde startIndex hasta endIndex incluido
+      );
+
+      return{
+        ...state, BminusOne: segmentedMatrix,
+      }
+    }
+
+    case XB: {      
+      const { matrixA, matrixB } = action.payload;
+      console.log(matrixA, matrixB);
+      const rowsA = matrixA.length;
+      const colsA = matrixA[0].length;
+      const sizeB = matrixB.length; // La longitud del vector B
+
+      // Caso especial: ambas matrices tienen un único elemento
+      if (rowsA === 1 && colsA === 1 && sizeB === 1) {
+        const singleResult = new Fraction(matrixA[0][0]).mul(new Fraction(matrixB[0]));
+        return {
+          ...state,
+          XbResult: [[singleResult.toFraction(true)]],
+        };
+      }
+
+      // Inicializar el resultado como un vector
+      const result = Array(rowsA).fill(new Fraction(0));
+      console.log(result);
+
+      // Multiplicar la matriz A por el vector B
+      for (let i = 0; i < rowsA; i++) {
+        for (let k = 0; k < colsA; k++) {
+          const valueA = new Fraction(matrixA[i][k]);
+          const valueB = new Fraction(matrixB[k]); // Acceder directamente al valor de matrixB[k]
+          result[i] = result[i].add(valueA.mul(valueB));
+        };
+      };
+
+      console.log(result);
+
+      // Convertir los resultados a fracción y devolver el estado actualizado
+      return {
+        ...state,
+        XbResult: result.map(el => el.toFraction(true)),
+      };
+
+
     }
   
     case isFACTIBLE: {
@@ -87,23 +142,6 @@ export const optimalSolutionReducer = (state = {}, action)=>{
       return state;
   }  
 };
-
-export const dualSimpleReducer = (initialState=[], action)=>{
-    switch (action.type) {
-        case SEARCH_LARGEST_NEGATIVE:
-            return;
-        case SEARCH_SMALLEST_POSITIVE_QUOTIENT:
-            return;
-        case DIVIDE_BY_ONE:
-            return;
-        case GAUSS_JORDAN:
-            return;
-        case GET_Z:
-            return;
-        default:
-            return initialState;
-    }
-}
 
 export const matrixReducer = (state = {}, action) => {
     switch (action.type) {

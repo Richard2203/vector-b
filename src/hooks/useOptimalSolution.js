@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import { optimalSolutionReducer } from '../Reducer/MatrixCalculationsReducer';
-import { UPDATE_INDEX, UPDATE_TABLE, UPDATE_TYPE, UPDATE_VALUE } from '../Reducer/actionTypes';
+import { SEGMENT_MATRIX, UPDATE_INDEX, UPDATE_TABLE, UPDATE_TYPE, UPDATE_VALUE, XB } from '../Reducer/actionTypes';
 
 const init = (initialTableState) => {
   const storedState = JSON.parse(localStorage.getItem('optimalSolution')) || initialTableState;
@@ -59,6 +59,27 @@ export const useOptimalSolution = (initialTableState = {} ) => {
 		});
 	};
 
+	const handleCalculateXb = (matrixA, matrixB) => {
+		dispatch({
+			type: XB,
+			payload:{ matrixA, matrixB }
+		});
+	};
+
+	const handleCalculateZ = () => {
+
+	};
+
+	const handleIsFactible = () => {
+
+	};
+
+	const handleSegmentMatrix = () => {
+		dispatch({
+			type: SEGMENT_MATRIX,
+		})
+	};
+
 	return {
 		...optimalSolution,
 		optimalSolution,
@@ -66,5 +87,9 @@ export const useOptimalSolution = (initialTableState = {} ) => {
 		handleUpdateIndex,
 		handleUpdateValue,
 		handleUpdateTable,
+		handleCalculateXb,
+		handleCalculateZ,
+		handleIsFactible,
+		handleSegmentMatrix,
 	};
 };
