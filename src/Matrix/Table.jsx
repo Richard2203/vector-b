@@ -29,7 +29,8 @@ const initialTableState = {
     },
   ],
   BminusOne:[],
-  XbResult:[]
+  XbResult:[],
+  isFactible: null,
 };
 
 export const Table = ({tablaSize, changeVectorB}) => {
@@ -47,7 +48,7 @@ export const Table = ({tablaSize, changeVectorB}) => {
 		handleUpdateTable(tablaSize[0], tablaSize[1]); 
 	}, [tablaSize]);
 
-	const { BminusOne } = optimalSolution;
+	const { BminusOne, XbResult, isFactible } = optimalSolution;
 
 	return (
 	 <>
@@ -97,7 +98,9 @@ export const Table = ({tablaSize, changeVectorB}) => {
 			handleCalculateXb = {handleCalculateXb} 
 			BminusOne =  { BminusOne } 
 			changeVectorB = { changeVectorB }
-			handleSegmentMatrix = {handleSegmentMatrix}/> 
+			handleSegmentMatrix = {handleSegmentMatrix}
+			XbResult = {XbResult}
+			isFactible = {isFactible} /> 
 	 </>
 	);
 };

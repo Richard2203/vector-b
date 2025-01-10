@@ -90,42 +90,40 @@ export const optimalSolutionReducer = (state = {}, action)=>{
 
     case XB: {      
       const { matrixA, matrixB } = action.payload;
-      console.log(matrixA, matrixB);
+
       const rowsA = matrixA.length;
       const colsA = matrixA[0].length;
-      const sizeB = matrixB.length; // La longitud del vector B
-
+      const sizeB = matrixB.length;
+      
       // Caso especial: ambas matrices tienen un único elemento
       if (rowsA === 1 && colsA === 1 && sizeB === 1) {
         const singleResult = new Fraction(matrixA[0][0]).mul(new Fraction(matrixB[0]));
         return {
           ...state,
           XbResult: [[singleResult.toFraction(true)]],
+          isFactible: singleResult.s > 0 
         };
       }
-
+      
       // Inicializar el resultado como un vector
       const result = Array(rowsA).fill(new Fraction(0));
-      console.log(result);
-
+      
       // Multiplicar la matriz A por el vector B
       for (let i = 0; i < rowsA; i++) {
         for (let k = 0; k < colsA; k++) {
           const valueA = new Fraction(matrixA[i][k]);
-          const valueB = new Fraction(matrixB[k]); // Acceder directamente al valor de matrixB[k]
+          const valueB = new Fraction(matrixB[k]); 
           result[i] = result[i].add(valueA.mul(valueB));
-        };
-      };
-
-      console.log(result);
-
-      // Convertir los resultados a fracción y devolver el estado actualizado
+        }
+      }
+    
+      const isFactible = result.every(el => el.s > 0);
+        
       return {
         ...state,
         XbResult: result.map(el => el.toFraction(true)),
-      };
-
-
+        isFactible
+      };      
     }
   
     case isFACTIBLE: {
